@@ -1,0 +1,133 @@
+<!--Developer Kéure Passos Soares-->
+<!DOCTYPE html>
+<html lang="Pt-Br">
+<head>
+	<meta charset="UTF-8">
+	<title>Campo Minado</title>
+	<script type="text/javascript">
+	// Função que determina se o jogador ganhou ou perdeu
+	function controle(num, k){
+		k = k-1;
+		// Se o jogador perdeu o jogo
+		if(num == 0){
+			var valor = document.getElementsByTagName("input");
+			var quadrado = valor[k];
+			quadrado.setAttribute('value', '*');
+			quadrado.style.backgroundColor = "#FF6347"; // Cor vibrante para simular a explosão
+			setTimeout(function() {
+				showGameOverPopup(); // Mostra o popup quando o jogador perde
+			}, 500);
+		}
+		// Se o jogador não perdeu, continua jogando
+		else {
+			var valor = document.getElementsByTagName("input");
+			var quadrado = valor[k];
+			quadrado.setAttribute('value', num);
+			quadrado.style.backgroundColor = "#FFDDC1"; // Cor suave quando o jogador acerta
+		}
+	}
+
+	// Função para mostrar o popup de fim de jogo
+	function showGameOverPopup() {
+		var popup = document.createElement("div");
+		popup.style.position = "fixed";
+		popup.style.top = "50%";
+		popup.style.left = "50%";
+		popup.style.transform = "translate(-50%, -50%)";
+		popup.style.padding = "30px";
+		popup.style.backgroundColor = "#A8DADC"; // Cor suave de fundo
+		popup.style.color = "#1D3557"; // Cor escura para o texto
+		popup.style.fontSize = "24px";
+		popup.style.fontFamily = "'Comic Sans MS', sans-serif";
+		popup.style.borderRadius = "15px";
+		popup.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
+		popup.style.textAlign = "center";
+		popup.innerHTML = "Você perdeu! <br><br><button onclick='restartGame()' style='background-color: #F1FAEE; font-size: 20px; padding: 10px 20px; color: #1D3557; border: none; border-radius: 10px; cursor: pointer;'>Reiniciar Jogo</button>";
+		document.body.appendChild(popup);
+	}
+
+	// Função para reiniciar o jogo
+	function restartGame() {
+		location.reload(); // Reinicia o jogo
+	}
+	</script>
+	<style type="text/css">
+		/* Estilo das células da tabela */
+		td{
+			width: 70px;
+			height: 70px;
+			border: 3px solid #000;
+		}
+		/* Definir estilo da tabela */
+		table{
+			margin-top: 30px;
+			margin-bottom: 30px;
+		}
+		/* Estilo do botão */
+		.btn{
+			width: 70px;
+			height: 70px;
+			font-size: 24px;
+			background-color: #FFD700;
+			border-radius: 12px;
+			cursor: pointer;
+			transition: background-color 0.3s ease, transform 0.3s ease;
+			font-family: 'Comic Sans MS', sans-serif;
+			color: #800080;
+			border: none;
+		}
+		/* Efeito de hover para o botão */
+		.btn:hover {
+			background-color: #FF6347;
+			transform: scale(1.1);
+		}
+		/* Efeito para o botão quando ele é pressionado */
+		.btn:active {
+			background-color: #FF4500;
+		}
+		/* Estilo geral da página */
+		body {
+			background-color: #F0E68C; /* Cor de fundo suave */
+			font-family: 'Comic Sans MS', sans-serif;
+			color: #800080; /* Cor de texto divertida */
+		}
+		/* Estilo do título principal */
+		.title {
+			text-align: center;
+			font-size: 50px;
+			font-weight: bold;
+			color: #FF1493; /* Cor vibrante */
+			font-family: 'Comic Sans MS', sans-serif;
+			text-shadow: 2px 2px #FF6347;
+		}
+		/* Estilo da mensagem de instrução */
+		.subtitle {
+			text-align: center;
+			font-size: 20px;
+			font-weight: bold;
+			color: #32CD32; /* Cor verde vibrante */
+		}
+	</style>
+</head>
+<body>
+	<div class="title"> ||  Campo Minado  || </div>
+	<div class="subtitle"> *Use o mouse para jogar.</div>
+
+	<table align="center">
+		<script type="text/javascript">
+			// Cria a tabela e as células com valores aleatórios
+			var k = 0;
+			for(var i = 0; i< 5; i++){
+				document.write('<tr>');
+					for(var j=0; j<5; j++){
+						k = k+1;
+						var num = Math.floor(Math.random()*3); // Gera número aleatório 0, 1, ou 2
+						document.write('<td> <input type="button" value="X" class="btn" id="'+k+'" onclick="controle('+num+','+k+');"></td>');
+					}
+				document.write('</tr>');
+			}
+		</script>
+	</table>
+	<div style="text-align: center; font-size: 12px; font-weight: bolder;"> Developer: Kéure Passos Soares</div>
+</body>
+</html>
